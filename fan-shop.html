@@ -1,1 +1,162 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electrical Fan Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #1f2937;
+    }
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h2 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .card-content p {
+      color: #4b5563;
+      margin: 5px 0 15px;
+    }
+    .order-btn {
+      background-color: #3b82f6;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .order-btn:hover {
+      background-color: #2563eb;
+    }
+    .order-form {
+      max-width: 400px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .order-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+    }
+    .order-form button {
+      width: 100%;
+      background-color: #10b981;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .order-form button:hover {
+      background-color: #059669;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌬️ Electrical Fan Shop</h1>
+
+  <div class="product-container" id="products">
+    <!-- Products will be injected here -->
+  </div>
+
+  <div class="order-form">
+    <h2>📝 Place Your Order</h2>
+    <input type="text" id="name" placeholder="Your Name" />
+    <input type="text" id="product" placeholder="Product Name" />
+    <input type="text" id="address" placeholder="Your Address" />
+    <button onclick="submitOrder()">Submit Order</button>
+  </div>
+
+  <script>
+    const products = [
+      {
+        name: "Ceiling Fan Model X",
+        price: 1200,
+        image: "https://images.unsplash.com/photo-1602526206607-711a5ef01577?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      },
+      {
+        name: "Wall Fan Model Y",
+        price: 850,
+        image: "https://images.unsplash.com/photo-1603791452906-b7f89e5b8257?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      },
+      {
+        name: "Table Fan Model Z",
+        price: 650,
+        image: "https://images.unsplash.com/photo-1584947985222-b2d65e9b43d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+      }
+    ];
+
+    const productContainer = document.getElementById("products");
+
+    products.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <div class="card-content">
+          <h2>${product.name}</h2>
+          <p>₹${product.price}</p>
+          <button class="order-btn" onclick="selectProduct('${product.name}')">Order Now</button>
+        </div>
+      `;
+      productContainer.appendChild(card);
+    });
+
+    function selectProduct(name) {
+      document.getElementById("product").value = name;
+    }
+
+    function submitOrder() {
+      const name = document.getElementById("name").value;
+      const product = document.getElementById("product").value;
+      const address = document.getElementById("address").value;
+
+      if (name && product && address) {
+        alert(`Order Placed!\n\nName: ${name}\nProduct: ${product}\nAddress: ${address}`);
+        document.getElementById("name").value = "";
+        document.getElementById("product").value = "";
+        document.getElementById("address").value = "";
+      } else {
+        alert("Please fill all fields.");
+      }
+    }
+  </script>
+
+</body>
+</html>
